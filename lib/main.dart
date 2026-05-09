@@ -16,6 +16,7 @@ import 'screens/restaurant/food_details_screen.dart';
 import 'screens/checkout/checkout_screen.dart';
 import 'screens/checkout/order_success_screen.dart';
 import 'screens/checkout/tracking_screen.dart';
+import 'package:animations/animations.dart';
 
 void main() {
   runApp(
@@ -34,56 +35,81 @@ class FoodlyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Page<dynamic> _buildPageWithAnimation(Widget child, GoRouterState state) {
+      return CustomTransitionPage(
+        key: state.pageKey,
+        child: child,
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          return SharedAxisTransition(
+            animation: animation,
+            secondaryAnimation: secondaryAnimation,
+            transitionType: SharedAxisTransitionType.horizontal,
+            child: child,
+          );
+        },
+      );
+    }
+
     final GoRouter router = GoRouter(
       initialLocation: '/',
       routes: [
         GoRoute(
           path: '/',
-          builder: (context, state) => const SplashScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const SplashScreen(), state),
         ),
         GoRoute(
           path: '/onboarding',
-          builder: (context, state) => const OnboardingScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const OnboardingScreen(), state),
         ),
         GoRoute(
           path: '/login',
-          builder: (context, state) => const LoginScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const LoginScreen(), state),
         ),
         GoRoute(
           path: '/signup',
-          builder: (context, state) => const SignUpScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const SignUpScreen(), state),
         ),
         GoRoute(
           path: '/home',
-          builder: (context, state) => const MainScreen(),
+          pageBuilder: (context, state) => CustomTransitionPage(
+            key: state.pageKey,
+            child: const MainScreen(),
+            transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              return FadeThroughTransition(
+                animation: animation,
+                secondaryAnimation: secondaryAnimation,
+                child: child,
+              );
+            },
+          ),
         ),
         GoRoute(
           path: '/search',
-          builder: (context, state) => const SearchScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const SearchScreen(), state),
         ),
         GoRoute(
           path: '/categories',
-          builder: (context, state) => const CategoriesScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const CategoriesScreen(), state),
         ),
         GoRoute(
           path: '/restaurant/:id',
-          builder: (context, state) => RestaurantDetailsScreen(restaurantId: state.pathParameters['id']!),
+          pageBuilder: (context, state) => _buildPageWithAnimation(RestaurantDetailsScreen(restaurantId: state.pathParameters['id']!), state),
         ),
         GoRoute(
           path: '/food/:id',
-          builder: (context, state) => FoodDetailsScreen(foodId: state.pathParameters['id']!),
+          pageBuilder: (context, state) => _buildPageWithAnimation(FoodDetailsScreen(foodId: state.pathParameters['id']!), state),
         ),
         GoRoute(
           path: '/checkout',
-          builder: (context, state) => const CheckoutScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const CheckoutScreen(), state),
         ),
         GoRoute(
           path: '/order_success',
-          builder: (context, state) => const OrderSuccessScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const OrderSuccessScreen(), state),
         ),
         GoRoute(
           path: '/tracking',
-          builder: (context, state) => const TrackingScreen(),
+          pageBuilder: (context, state) => _buildPageWithAnimation(const TrackingScreen(), state),
         ),
       ],
     );

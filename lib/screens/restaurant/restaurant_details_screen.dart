@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../models/models.dart';
 import '../../data/dummy_data.dart';
 import '../../theme/app_theme.dart';
@@ -24,10 +25,13 @@ class RestaurantDetailsScreen extends StatelessWidget {
             expandedHeight: 250.0,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                restaurant.imageUrl,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stack) => Container(color: Colors.grey),
+              background: Hero(
+                tag: 'restaurant_image_${restaurant.id}',
+                child: Image.asset(
+                  restaurant.imageUrl,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stack) => Container(color: Colors.grey),
+                ),
               ),
             ),
             leading: Padding(
@@ -88,7 +92,12 @@ class RestaurantDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 30),
                   const Text('Menu', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 15),
-                  ...restaurant.menu.map((food) => _buildMenuItem(context, food)).toList(),
+                  ...restaurant.menu.asMap().entries.map((entry) {
+                    return _buildMenuItem(context, entry.value)
+                        .animate()
+                        .fade(duration: 400.ms, delay: (100 * entry.key).ms)
+                        .slideY(begin: 0.1);
+                  }).toList(),
                 ],
               ),
             ),
@@ -110,14 +119,17 @@ class RestaurantDetailsScreen extends StatelessWidget {
         ),
         child: Row(
           children: [
-            ClipRRect(
-              borderRadius: const BorderRadius.horizontal(left: Radius.circular(15)),
-              child: Image.asset(
-                food.imageUrl,
-                width: 100,
-                height: 100,
-                fit: BoxFit.cover,
-                errorBuilder: (context, err, stack) => Container(width: 100, height: 100, color: Colors.grey),
+            Hero(
+              tag: 'food_image_${food.id}',
+              child: ClipRRect(
+                borderRadius: const BorderRadius.horizontal(left: Radius.circular(15)),
+                child: Image.asset(
+                  food.imageUrl,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, err, stack) => Container(width: 100, height: 100, color: Colors.grey),
+                ),
               ),
             ),
             const SizedBox(width: 15),

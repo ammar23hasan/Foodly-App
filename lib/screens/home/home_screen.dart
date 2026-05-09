@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../data/dummy_data.dart';
 import '../../theme/app_theme.dart';
 
@@ -11,9 +12,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            await Future.delayed(const Duration(seconds: 1));
+          },
+          color: AppTheme.primaryColor,
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
               floating: true,
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               title: Column(
@@ -174,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-                          );
+                          ).animate().fade(duration: 400.ms, delay: (50 * index).ms).slideX(begin: 0.2);
                         },
                       ),
                     ),
@@ -273,7 +279,7 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                        );
+                        ).animate().fade(duration: 500.ms, delay: (100 * index).ms).slideY(begin: 0.1);
                       },
                     ),
                   ],
@@ -281,6 +287,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
+        ),
         ),
       ),
     );

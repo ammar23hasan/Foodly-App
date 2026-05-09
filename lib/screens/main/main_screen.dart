@@ -5,6 +5,9 @@ import '../home/home_screen.dart';
 import '../checkout/cart_screen.dart';
 import '../profile/favorites_screen.dart';
 import '../profile/profile_screen.dart';
+import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
+import '../../providers/providers.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -53,23 +56,51 @@ class _MainScreenState extends State<MainScreen> {
           unselectedItemColor: Colors.grey,
           showSelectedLabels: true,
           showUnselectedLabels: true,
-          items: const [
-            BottomNavigationBarItem(
+          items: [
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.home),
               activeIcon: Icon(CupertinoIcons.house_fill),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.cart),
-              activeIcon: Icon(CupertinoIcons.cart_fill),
+              icon: Consumer<CartProvider>(
+                builder: (context, cart, child) {
+                  return badges.Badge(
+                    showBadge: cart.itemCount > 0,
+                    badgeContent: Text(
+                      '${cart.itemCount}',
+                      style: const TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                    badgeAnimation: const badges.BadgeAnimation.scale(
+                      animationDuration: Duration(milliseconds: 300),
+                    ),
+                    child: const Icon(CupertinoIcons.cart),
+                  );
+                },
+              ),
+              activeIcon: Consumer<CartProvider>(
+                builder: (context, cart, child) {
+                  return badges.Badge(
+                    showBadge: cart.itemCount > 0,
+                    badgeContent: Text(
+                      '${cart.itemCount}',
+                      style: const TextStyle(color: Colors.white, fontSize: 10),
+                    ),
+                    badgeAnimation: const badges.BadgeAnimation.scale(
+                      animationDuration: Duration(milliseconds: 300),
+                    ),
+                    child: const Icon(CupertinoIcons.cart_fill),
+                  );
+                },
+              ),
               label: 'Cart',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.heart),
               activeIcon: Icon(CupertinoIcons.heart_fill),
               label: 'Favorites',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(CupertinoIcons.person),
               activeIcon: Icon(CupertinoIcons.person_solid),
               label: 'Profile',

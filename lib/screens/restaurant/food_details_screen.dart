@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../models/models.dart';
 import '../../data/dummy_data.dart';
 import '../../providers/providers.dart';
@@ -54,7 +55,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                     icon: Icon(
                       isFav ? Icons.favorite : Icons.favorite_border,
                       color: isFav ? Colors.red : Colors.black,
-                    ),
+                    ).animate(target: isFav ? 1 : 0).scale(duration: 200.ms, curve: Curves.elasticOut),
                     onPressed: () => favoritesProvider.toggleFavorite(food.id),
                   );
                 },
@@ -70,12 +71,15 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  food.imageUrl,
-                  height: 350,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, err, stack) => Container(height: 350, color: Colors.grey),
+                Hero(
+                  tag: 'food_image_${food.id}',
+                  child: Image.asset(
+                    food.imageUrl,
+                    height: 350,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, err, stack) => Container(height: 350, color: Colors.grey),
+                  ),
                 ),
                 Container(
                   transform: Matrix4.translationValues(0, -30, 0),
@@ -174,7 +178,17 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                               if (quantity > 1) setState(() => quantity--);
                             },
                           ),
-                          Text('$quantity', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          AnimatedSwitcher(
+                            duration: const Duration(milliseconds: 300),
+                            transitionBuilder: (Widget child, Animation<double> animation) {
+                              return ScaleTransition(scale: animation, child: child);
+                            },
+                            child: Text(
+                              '$quantity',
+                              key: ValueKey<int>(quantity),
+                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ),
                           IconButton(
                             icon: const Icon(Icons.add),
                             onPressed: () => setState(() => quantity++),

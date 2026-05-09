@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../theme/app_theme.dart';
 
 class TrackingScreen extends StatelessWidget {
@@ -63,10 +64,10 @@ class TrackingScreen extends StatelessWidget {
                     ],
                   ),
                   const Divider(height: 30),
-                  _buildTrackingStep(context, 'Order Confirmed', 'Your order has been received', true),
-                  _buildTrackingStep(context, 'Preparing', 'The restaurant is preparing your food', true),
-                  _buildTrackingStep(context, 'On the way', 'Your driver is picking up the food', false),
-                  _buildTrackingStep(context, 'Delivered', 'Enjoy your meal!', false, isLast: true),
+                  _buildTrackingStep(context, 'Order Confirmed', 'Your order has been received', true).animate().fade(duration: 400.ms, delay: 100.ms).slideX(),
+                  _buildTrackingStep(context, 'Preparing', 'The restaurant is preparing your food', true).animate().fade(duration: 400.ms, delay: 300.ms).slideX(),
+                  _buildTrackingStep(context, 'On the way', 'Your driver is picking up the food', false).animate().fade(duration: 400.ms, delay: 500.ms).slideX(),
+                  _buildTrackingStep(context, 'Delivered', 'Enjoy your meal!', false, isLast: true).animate().fade(duration: 400.ms, delay: 700.ms).slideX(),
                   
                   const Spacer(),
                   // Driver Info
@@ -102,7 +103,7 @@ class TrackingScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
+                  ).animate().fade(duration: 600.ms, delay: 1000.ms).slideY(begin: 0.5),
                 ],
               ),
             ),

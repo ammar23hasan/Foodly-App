@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import '../../providers/providers.dart';
 import '../../theme/app_theme.dart';
 
@@ -56,9 +57,26 @@ class CartScreen extends StatelessWidget {
                     itemCount: cartItems.length,
                     itemBuilder: (context, index) {
                       final item = cartItems[index];
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 20),
-                        padding: const EdgeInsets.all(10),
+                      return Slidable(
+                        key: ValueKey(item.food.id),
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              onPressed: (context) {
+                                cartProvider.updateQuantity(item.food.id, 0); // remove item
+                              },
+                              backgroundColor: Colors.red,
+                              foregroundColor: Colors.white,
+                              icon: Icons.delete,
+                              label: 'Remove',
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ],
+                        ),
+                        child: Container(
+                          margin: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(
                           color: Theme.of(context).cardColor,
                           borderRadius: BorderRadius.circular(15),
@@ -95,7 +113,11 @@ class CartScreen extends StatelessWidget {
                                   icon: const Icon(Icons.add_circle_outline, color: AppTheme.primaryColor),
                                   onPressed: () => cartProvider.updateQuantity(item.food.id, item.quantity + 1),
                                 ),
-                                Text('${item.quantity}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                                AnimatedSwitcher(
+                                  duration: const Duration(milliseconds: 300),
+                                  transitionBuilder: (Widget child, Animation<double> animation) => ScaleTransition(scale: animation, child: child),
+                                  child: Text('${item.quantity}', key: ValueKey<int>(item.quantity), style: const TextStyle(fontWeight: FontWeight.bold)),
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.remove_circle_outline, color: AppTheme.primaryColor),
                                   onPressed: () => cartProvider.updateQuantity(item.food.id, item.quantity - 1),
@@ -103,6 +125,7 @@ class CartScreen extends StatelessWidget {
                               ],
                             ),
                           ],
+                        ),
                         ),
                       );
                     },
@@ -133,7 +156,18 @@ class CartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text('Total', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                            Text('\$${total.toStringAsFixed(2)}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primaryColor)),
+                            AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 400),
+                              transitionBuilder: (child, animation) => SlideTransition(
+                                position: Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(animation),
+                                child: FadeTransition(opacity: animation, child: child),
+                              ),
+                              child: Text(
+                                '\$${total.toStringAsFixed(2)}',
+                                key: ValueKey<double>(total),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: AppTheme.primaryColor),
+                              ),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20),
