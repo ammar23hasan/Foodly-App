@@ -8,6 +8,8 @@ class Food {
   final double rating;
   final int reviews;
   final List<String> addons;
+  final int calories;
+  final String prepTime;
 
   Food({
     required this.id,
@@ -19,6 +21,8 @@ class Food {
     this.rating = 0.0,
     this.reviews = 0,
     this.addons = const [],
+    this.calories = 0,
+    this.prepTime = '15 min',
   });
 }
 
@@ -32,6 +36,8 @@ class Restaurant {
   final double deliveryFee;
   final List<String> tags;
   final List<Food> menu;
+  final bool isOpen;
+  final double minimumOrder;
 
   Restaurant({
     required this.id,
@@ -43,6 +49,8 @@ class Restaurant {
     required this.deliveryFee,
     required this.tags,
     this.menu = const [],
+    this.isOpen = true,
+    this.minimumOrder = 5.0,
   });
 }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import '../../providers/providers.dart';
 import '../../data/dummy_data.dart';
 import '../../theme/app_theme.dart';
@@ -12,8 +13,8 @@ class FavoritesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final favProvider = context.watch<FavoritesProvider>();
     final favIds = favProvider.favoriteFoodIds;
-    
-    final favoriteFoods = DummyData.popularFoods.where((f) => favIds.contains(f.id)).toList();
+    final favoriteFoods = DummyData.allFoods.where((f) => favIds.contains(f.id)).toList();
+    final cardColor = Theme.of(context).cardColor;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,11 +25,13 @@ class FavoritesScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.favorite_border, size: 100, color: Colors.grey.shade300),
+                  Icon(Icons.favorite_border, size: 90, color: Colors.grey.shade300),
                   const SizedBox(height: 20),
-                  const Text('No favorites yet', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  const Text('No favorites yet',
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 10),
-                  const Text('Like a dish to see it here.', style: TextStyle(color: Colors.grey)),
+                  const Text('Tap ❤️ on any dish to save it here.',
+                      style: TextStyle(color: Colors.grey)),
                 ],
               ),
             )
@@ -39,12 +42,15 @@ class FavoritesScreen extends StatelessWidget {
                 final food = favoriteFoods[index];
                 return InkWell(
                   onTap: () => context.push('/food/${food.id}'),
+                  borderRadius: BorderRadius.circular(15),
                   child: Container(
-                    margin: const EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 15),
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: cardColor,
                       borderRadius: BorderRadius.circular(15),
-                      boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)],
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10)
+                      ],
                     ),
                     child: Row(
                       children: [
@@ -55,7 +61,8 @@ class FavoritesScreen extends StatelessWidget {
                             width: 100,
                             height: 100,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, err, stack) => Container(width: 100, height: 100, color: Colors.grey),
+                            errorBuilder: (c, e, s) =>
+                                Container(width: 100, height: 100, color: Colors.grey.shade200),
                           ),
                         ),
                         const SizedBox(width: 15),
@@ -63,9 +70,28 @@ class FavoritesScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(food.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                              Text(food.name,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.bold, fontSize: 15)),
                               const SizedBox(height: 5),
-                              Text('\$${food.price.toStringAsFixed(2)}', style: const TextStyle(color: AppTheme.primaryColor, fontWeight: FontWeight.bold)),
+                              Row(
+                                children: [
+                                  const Icon(Icons.star, color: Colors.amber, size: 13),
+                                  const SizedBox(width: 3),
+                                  Text('${food.rating}',
+                                      style: const TextStyle(
+                                          fontSize: 12, fontWeight: FontWeight.w600)),
+                                  Text(' · ${food.prepTime}',
+                                      style: const TextStyle(
+                                          color: Colors.grey, fontSize: 12)),
+                                ],
+                              ),
+                              const SizedBox(height: 5),
+                              Text('\$${food.price.toStringAsFixed(2)}',
+                                  style: const TextStyle(
+                                      color: AppTheme.primaryColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15)),
                             ],
                           ),
                         ),
@@ -76,7 +102,7 @@ class FavoritesScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                );
+                ).animate().fade(duration: 400.ms, delay: (60 * index).ms).slideX(begin: 0.1);
               },
             ),
     );

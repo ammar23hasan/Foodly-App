@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 
 import 'theme/app_theme.dart';
 import 'providers/providers.dart';
+import 'providers/theme_provider.dart';
+import 'providers/user_provider.dart';
 import 'screens/auth/splash_screen.dart';
 import 'screens/auth/onboarding_screen.dart';
 import 'screens/auth/login_screen.dart';
@@ -24,6 +26,8 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => CartProvider()),
         ChangeNotifierProvider(create: (_) => FavoritesProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
       child: const FoodlyApp(),
     ),
@@ -35,7 +39,9 @@ class FoodlyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Page<dynamic> _buildPageWithAnimation(Widget child, GoRouterState state) {
+    final themeProvider = context.watch<ThemeProvider>();
+
+    Page<dynamic> buildPageWithAnimation(Widget child, GoRouterState state) {
       return CustomTransitionPage(
         key: state.pageKey,
         child: child,
@@ -55,19 +61,19 @@ class FoodlyApp extends StatelessWidget {
       routes: [
         GoRoute(
           path: '/',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const SplashScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const SplashScreen(), state),
         ),
         GoRoute(
           path: '/onboarding',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const OnboardingScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const OnboardingScreen(), state),
         ),
         GoRoute(
           path: '/login',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const LoginScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const LoginScreen(), state),
         ),
         GoRoute(
           path: '/signup',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const SignUpScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const SignUpScreen(), state),
         ),
         GoRoute(
           path: '/home',
@@ -85,41 +91,47 @@ class FoodlyApp extends StatelessWidget {
         ),
         GoRoute(
           path: '/search',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const SearchScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const SearchScreen(), state),
         ),
         GoRoute(
           path: '/categories',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const CategoriesScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const CategoriesScreen(), state),
         ),
         GoRoute(
           path: '/restaurant/:id',
-          pageBuilder: (context, state) => _buildPageWithAnimation(RestaurantDetailsScreen(restaurantId: state.pathParameters['id']!), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            RestaurantDetailsScreen(restaurantId: state.pathParameters['id']!),
+            state,
+          ),
         ),
         GoRoute(
           path: '/food/:id',
-          pageBuilder: (context, state) => _buildPageWithAnimation(FoodDetailsScreen(foodId: state.pathParameters['id']!), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(
+            FoodDetailsScreen(foodId: state.pathParameters['id']!),
+            state,
+          ),
         ),
         GoRoute(
           path: '/checkout',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const CheckoutScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const CheckoutScreen(), state),
         ),
         GoRoute(
           path: '/order_success',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const OrderSuccessScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const OrderSuccessScreen(), state),
         ),
         GoRoute(
           path: '/tracking',
-          pageBuilder: (context, state) => _buildPageWithAnimation(const TrackingScreen(), state),
+          pageBuilder: (context, state) => buildPageWithAnimation(const TrackingScreen(), state),
         ),
       ],
     );
 
     return MaterialApp.router(
-      title: 'Foodly',
+      title: 'YummyGo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
+      themeMode: themeProvider.themeMode,
       routerConfig: router,
     );
   }

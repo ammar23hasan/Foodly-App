@@ -17,7 +17,7 @@ class AppTheme {
         seedColor: primaryColor,
         primary: primaryColor,
         secondary: secondaryColor,
-        background: bgColor,
+        surface: bgColor,
       ),
       textTheme: GoogleFonts.interTextTheme().apply(
         bodyColor: textDark,
@@ -80,7 +80,7 @@ class AppTheme {
         brightness: Brightness.dark,
         primary: primaryColor,
         secondary: secondaryColor,
-        background: darkBgColor,
+        surface: darkBgColor,
       ),
       textTheme: GoogleFonts.interTextTheme(ThemeData.dark().textTheme).apply(
         bodyColor: Colors.white,

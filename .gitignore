@@ -1,0 +1,44 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom
+.buildlog
+.history
+.svn
+.idea
+*.iml
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Windows
+/windows/flutter/ephemeral/
+/windows/flutter/generated_config.cmake
+
+# Android-specific
+/android/app/src/main/res/drawable-*/
+/android/app/src/main/res/mipmap-*/
+*.keystore
+*.jks
+
+# iOS-specific
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/flutter_export_environment.sh
+/ios/Flutter/App.framework
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/DerivedData/
+
+# Symbol files
+*.pdb
+*.dll
+*.exe

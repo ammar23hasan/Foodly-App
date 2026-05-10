@@ -17,17 +17,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     {
       'title': 'Choose a Tasty Dish',
       'description': 'Order anything you want from your favorite restaurant.',
-      'image': 'images/kerfin7_nea_3142.jpg'
+      'image': 'images/Top view full table of food.jpg'
     },
     {
-      'title': 'Easy Payment',
-      'description': 'Payment made easy through debit card, credit card, or cash on delivery.',
-      'image': 'images/423.jpg'
+      'title': 'Fast Delivery',
+      'description': 'Get your food delivered to your door in minutes, fresh and hot.',
+      'image': 'images/Food delivery guy on scooter.jpg'
     },
     {
       'title': 'Enjoy the Taste',
-      'description': 'Healthy eating means eating a variety of foods that give you the nutrients you need.',
-      'image': 'images/14.jpg'
+      'description': 'Discover hundreds of dishes from top restaurants near you.',
+      'image': 'images/Ramen noodle soup bowl.jpg'
     },
   ];
 
