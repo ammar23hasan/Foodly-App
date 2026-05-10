@@ -2,12 +2,12 @@ import '../models/models.dart';
 
 class DummyData {
   static final List<Category> categories = [
-    Category(id: '1', name: 'Burger', iconPath: 'images/14.jpg'),
-    Category(id: '2', name: 'Pizza', iconPath: 'images/423.jpg'),
-    Category(id: '3', name: 'Snacks', iconPath: 'images/32.jpg'),
-    Category(id: '4', name: 'Drinks', iconPath: 'images/435.jpg'),
-    Category(id: '5', name: 'Pasta', iconPath: 'images/12.jpg'),
-    Category(id: '6', name: 'Kebab', iconPath: 'images/13.jpg'),
+    Category(id: '1', name: 'Burger', iconPath: 'images/burgar.png'),
+    Category(id: '2', name: 'Pizza', iconPath: 'images/pizza.png'),
+    Category(id: '3', name: 'Snacks', iconPath: 'images/snacks.png'),
+    Category(id: '4', name: 'Drinks', iconPath: 'images/drinks.png'),
+    Category(id: '5', name: 'Pasta', iconPath: 'images/pasta.png'),
+    Category(id: '6', name: 'Kebab', iconPath: 'images/kepap.png'),
   ];
 
   static final List<Food> popularFoods = [
@@ -16,7 +16,7 @@ class DummyData {
       name: 'Double Cheese Burger',
       description: 'Juicy double beef patty with extra melting cheese and our secret sauce.',
       price: 12.99,
-      imageUrl: 'images/14.jpg',
+      imageUrl: 'images/Juicy beef burger with cheese.webp',
       categoryId: '1',
       rating: 4.8,
       reviews: 124,
@@ -27,7 +27,7 @@ class DummyData {
       name: 'Pepperoni Pizza',
       description: 'Classic pizza with rich tomato sauce, mozzarella, and spicy pepperoni.',
       price: 15.99,
-      imageUrl: 'images/423.jpg',
+      imageUrl: 'images/Pepperoni pizza slice.jpg',
       categoryId: '2',
       rating: 4.7,
       reviews: 320,
@@ -38,7 +38,7 @@ class DummyData {
       name: 'Syrian Shawarma',
       description: 'Authentic chicken shawarma with garlic sauce and pickles in toasted bread.',
       price: 8.50,
-      imageUrl: 'images/15.jpg',
+      imageUrl: 'images/Crispy fried chicken bucket.jpeg',
       categoryId: '6',
       rating: 4.9,
       reviews: 512,
@@ -49,7 +49,7 @@ class DummyData {
     Restaurant(
       id: 'r1',
       name: 'Burger King',
-      imageUrl: 'images/kerfin7_nea_3142.jpg',
+      imageUrl: 'images/Chef cooking in commercial kitchen.jpg',
       rating: 4.5,
       reviews: 1024,
       deliveryTime: '15-25 min',
@@ -60,7 +60,7 @@ class DummyData {
     Restaurant(
       id: 'r2',
       name: 'Pizza Hut',
-      imageUrl: 'images/32.jpg',
+      imageUrl: 'images/Top view full table of food.jpg',
       rating: 4.2,
       reviews: 840,
       deliveryTime: '30-40 min',

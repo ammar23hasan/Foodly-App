@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         image: const DecorationImage(
-                          image: AssetImage('images/kerfin7_nea_3142.jpg'),
+                          image: AssetImage('images/Top view full table of food.jpg'),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -170,8 +170,11 @@ class HomeScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  padding: const EdgeInsets.all(15),
-                                  child: Image.asset(category.iconPath),
+                                  padding: const EdgeInsets.all(8),
+                                  child: Image.asset(
+                                    category.iconPath,
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
