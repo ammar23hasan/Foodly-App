@@ -22,34 +22,36 @@
 ## 📱 Screenshots
 
 <p align="center">
-  <!-- Add Splash/Onboarding image here -->
-  <!-- Example: <img src="link_to_splash_image" width="200" /> -->
+<img width="1280" height="2856" alt="Screenshot_1778461226" src="https://github.com/user-attachments/assets/a20601ac-4983-443a-8bac-b286af5dd143" />
+  <img width="1280" height="2856" alt="Screenshot_1778459538" src="https://github.com/user-attachments/assets/a232a152-32ce-4f2b-bd06-a6711044121a" />
   <i>[Splash & Onboarding]</i>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  
-  <!-- Add Authentication image here -->
-  <!-- <img src="link_to_auth_image" width="200" /> -->
+  <img width="1280" height="2856" alt="Screenshot_1778459557" src="https://github.com/user-attachments/assets/477ff348-c8ea-419e-b581-08eea0397e6d" />
+
   <i>[Authentication / Login]</i>
   &nbsp;&nbsp;&nbsp;&nbsp;
   
-  <!-- Add Home Screen image here -->
-  <!-- <img src="link_to_home_image" width="200" /> -->
+<img width="1280" height="2856" alt="Screenshot_1778459566" src="https://github.com/user-attachments/assets/0d03fcc1-0af6-4e75-a277-56dc57a1cb93" />
+
   <i>[Home Screen]</i>
 </p>
 
 <p align="center">
-  <!-- Add Food/Restaurant Details image here -->
-  <!-- <img src="link_to_details_image" width="200" /> -->
+<img width="1280" height="2856" alt="Screenshot_1778459601" src="https://github.com/user-attachments/assets/3242dea3-f96c-42e0-ba6e-4804a2db9fdf" />
+<img width="1280" height="2856" alt="Screenshot_1778459612" src="https://github.com/user-attachments/assets/d5efd16a-8cf8-4bae-8263-0bf0b8ff65cf" />
+
   <i>[Food & Restaurant Details]</i>
   &nbsp;&nbsp;&nbsp;&nbsp;
   
-  <!-- Add Checkout/Cart image here -->
-  <!-- <img src="link_to_checkout_image" width="200" /> -->
+<img width="1280" height="2856" alt="Screenshot_1778459627" src="https://github.com/user-attachments/assets/4d1ee8fa-65b0-4c0a-8b31-5106ee98f159" />
+<img width="1280" height="2856" alt="Screenshot_1778459707" src="https://github.com/user-attachments/assets/f63eea3f-dbce-4279-b01d-a59703a82ee9" />
+
   <i>[Checkout & Cart]</i>
   &nbsp;&nbsp;&nbsp;&nbsp;
   
-  <!-- Add Order Tracking image here -->
-  <!-- <img src="link_to_tracking_image" width="200" /> -->
+<img width="1280" height="2856" alt="Screenshot_1778459649" src="https://github.com/user-attachments/assets/2a5030fc-dbfd-4c04-a8bc-b442b3e55f0f" />
+<img width="1280" height="2856" alt="Screenshot_1778459663" src="https://github.com/user-attachments/assets/ca952ade-6f6f-4ca6-a065-b8feb516a4bf" />
+
   <i>[Order Tracking]</i>
 </p>
 
